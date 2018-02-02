@@ -9,6 +9,7 @@
     <modules>
         <module>homemade-eureka-service</module>
         <module>homemade-whitelist-service</module>
+        <module>homemade-whitelist-client</module>
     </modules>
     <packaging>pom</packaging>
 

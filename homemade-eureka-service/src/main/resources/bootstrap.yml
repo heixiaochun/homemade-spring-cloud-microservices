@@ -1,3 +1,6 @@
+spring:
+  application:
+    name: homemade-eureka-service
 server:
   port: ${PORT:8081}
 eureka:

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: homemade-whitelist-client
+server:
+  port: ${PORT:8083}
+eureka:
+  client:
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8081/eureka}
+  instance:
+    preferIpAddress: true
