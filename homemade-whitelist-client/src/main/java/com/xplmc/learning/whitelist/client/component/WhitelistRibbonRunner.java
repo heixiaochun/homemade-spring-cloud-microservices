@@ -1,19 +1,18 @@
 package com.xplmc.learning.whitelist.client.component;
 
-import com.netflix.loadbalancer.*;
-import com.xplmc.learning.whitelist.client.common.WhitelistClientConstants;
+import com.netflix.loadbalancer.BaseLoadBalancer;
+import com.netflix.loadbalancer.LoadBalancerBuilder;
+import com.netflix.loadbalancer.RoundRobinRule;
+import com.netflix.loadbalancer.Server;
+import com.xplmc.learning.whitelist.client.common.HomemadeWhitelistServiceProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -29,15 +28,18 @@ public class WhitelistRibbonRunner implements CommandLineRunner {
 
     private DiscoveryClient discoveryClient;
 
+    private HomemadeWhitelistServiceProperties homemadeWhitelistServiceProperties;
+
     @Autowired
-    public WhitelistRibbonRunner(DiscoveryClient discoveryClient) {
+    public WhitelistRibbonRunner(DiscoveryClient discoveryClient, HomemadeWhitelistServiceProperties homemadeWhitelistServiceProperties) {
         this.discoveryClient = discoveryClient;
+        this.homemadeWhitelistServiceProperties = homemadeWhitelistServiceProperties;
     }
 
     @Override
     public void run(String... strings) throws Exception {
         //get all whitelist server list and put them into list
-        List<Server> serverList = discoveryClient.getInstances(WhitelistClientConstants.WHITELIST_SERVICE_NAME)
+        List<Server> serverList = discoveryClient.getInstances(homemadeWhitelistServiceProperties.getName())
                 .stream().map(si -> new Server(si.getHost(), si.getPort())).collect(Collectors.toList());
 
         //create a RoundRobinRule load balancer
@@ -45,7 +47,7 @@ public class WhitelistRibbonRunner implements CommandLineRunner {
                 .buildFixedServerListLoadBalancer(serverList);
 
         //test load balancer selection rule
-        IntStream.range(0, 10).forEach(i->{
+        IntStream.range(0, 10).forEach(i -> {
             Server currentServer = lb.chooseServer();
             logger.info("count: {}, selected: {}", i, currentServer);
         });

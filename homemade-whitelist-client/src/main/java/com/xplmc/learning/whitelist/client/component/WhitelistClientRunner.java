@@ -1,6 +1,6 @@
 package com.xplmc.learning.whitelist.client.component;
 
-import com.xplmc.learning.whitelist.client.common.WhitelistClientConstants;
+import com.xplmc.learning.whitelist.client.common.HomemadeWhitelistServiceProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +21,12 @@ public class WhitelistClientRunner implements CommandLineRunner {
 
     private DiscoveryClient discoveryClient;
 
+    private HomemadeWhitelistServiceProperties homemadeWhitelistServiceProperties;
+
     @Autowired
-    public WhitelistClientRunner(DiscoveryClient discoveryClient) {
+    public WhitelistClientRunner(DiscoveryClient discoveryClient, HomemadeWhitelistServiceProperties homemadeWhitelistServiceProperties) {
         this.discoveryClient = discoveryClient;
+        this.homemadeWhitelistServiceProperties = homemadeWhitelistServiceProperties;
     }
 
     @Override
@@ -31,10 +34,9 @@ public class WhitelistClientRunner implements CommandLineRunner {
         logger.info("all registered services list, {}", discoveryClient.getServices());
 
         //list all whitelist services
-        String serviceId = WhitelistClientConstants.WHITELIST_SERVICE_NAME;
+        String serviceId = homemadeWhitelistServiceProperties.getName();
         logger.info("registered instance of {} in eureka service registry", serviceId);
         discoveryClient.getInstances(serviceId).forEach(this::printServiceInstance);
-
     }
 
     /**

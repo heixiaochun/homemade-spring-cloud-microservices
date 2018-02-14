@@ -10,3 +10,8 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8081/eureka}
   instance:
     preferIpAddress: true
+homemade:
+  whitelist:
+    service:
+      name: homemade-whitelist-service
+      echoPath: /simple/echo/{text}
