@@ -10,7 +10,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Component;
 
 /**
- * run after application started
+ * client runner example, run after application started
  *
  * @author luke
  */
