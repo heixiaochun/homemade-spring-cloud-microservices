@@ -16,7 +16,12 @@ import java.util.Map;
 public class SimpleEchoController {
 
     @GetMapping(("/simple/echo/{text}"))
-    public Map<String, String> echo(@PathVariable("text") String text) {
+    public Map<String, String> echo(@PathVariable String text) {
+        try {
+            Thread.sleep((long) (Math.random() * 10L));
+        } catch (InterruptedException e) {
+            //ignore
+        }
         return Collections.singletonMap("text", text);
     }
 
