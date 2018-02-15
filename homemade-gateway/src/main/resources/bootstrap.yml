@@ -1,8 +1,10 @@
 spring:
   application:
     name: homemade-gateway
+
 server:
   port: ${PORT:8083}
+
 eureka:
   client:
     registerWithEureka: false
@@ -10,3 +12,13 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8081/eureka}
   instance:
     preferIpAddress: true
+
+management:
+  security:
+    enabled: false
+
+zuul:
+  routes:
+    hi:
+      path: /wl/**
+      serviceId: homemade-whitelist

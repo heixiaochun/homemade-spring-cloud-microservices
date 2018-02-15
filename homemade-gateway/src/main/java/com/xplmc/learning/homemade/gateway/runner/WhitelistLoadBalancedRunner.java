@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 /**
- * load balanced client runner example, run after application started
+ * example show how @LoadBalanced works
  *
  * @author luke
  */

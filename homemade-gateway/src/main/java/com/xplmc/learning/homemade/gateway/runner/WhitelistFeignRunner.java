@@ -8,7 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 /**
- * feign client runner example, run after application started
+ * example show how feign works
  *
  * @author luke
  */

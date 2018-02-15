@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * ribbon client runner example, run after application started
+ * example show how Ribbon works
  *
  * @author luke
  */
