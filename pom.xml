@@ -8,8 +8,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>homemade-eureka-service</module>
-        <module>homemade-whitelist-service</module>
-        <module>homemade-whitelist-client</module>
+        <module>homemade-whitelist</module>
+        <module>homemade-gateway</module>
     </modules>
     <packaging>pom</packaging>
 
