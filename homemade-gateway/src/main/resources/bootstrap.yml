@@ -22,3 +22,12 @@ zuul:
     hi:
       path: /wl/**
       serviceId: homemade-whitelist
+
+# using eureka cluster mode
+---
+spring:
+  profiles: cluster_mode
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:9081/eureka/,http://peer2:9082/eureka/,http://peer3:9083/eureka/

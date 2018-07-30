@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: homemade-eureka-service
+server:
+  port: 9081
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://peer2:9082/eureka/,http://peer3:9083/eureka/
