@@ -1,6 +1,9 @@
 spring:
   application:
     name: homemade-gateway
+  kafka:
+    producer:
+      bootstrap-servers: 192.168.3.8:9092
 
 server:
   port: ${PORT:8083}
@@ -22,6 +25,13 @@ zuul:
     hi:
       path: /wl/**
       serviceId: homemade-whitelist
+
+tradeResult:
+  topicName: TRADE_RESULT_DEV
+  systemGroup: test
+  systemCode: test
+  systemName: test
+
 
 # using eureka cluster mode
 ---
