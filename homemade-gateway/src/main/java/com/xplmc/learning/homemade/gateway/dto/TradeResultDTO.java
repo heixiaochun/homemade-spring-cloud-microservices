@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * trade result DTO
+ * trade response DTO
  *
  * @author luke
  */
@@ -28,9 +28,9 @@ public class TradeResultDTO implements Serializable {
     private String systemName;
 
     /**
-     * API's url
+     * API's signature
      */
-    private String apiUrl;
+    private String apiSignature;
 
     /**
      * API's name
@@ -38,14 +38,9 @@ public class TradeResultDTO implements Serializable {
     private String apiName;
 
     /**
-     * return code
+     * return response
      */
-    private String retCode;
-
-    /**
-     * return msg
-     */
-    private String retMsg;
+    private Object response;
 
     /**
      * request time;
@@ -86,12 +81,12 @@ public class TradeResultDTO implements Serializable {
         this.systemName = systemName;
     }
 
-    public String getApiUrl() {
-        return apiUrl;
+    public String getApiSignature() {
+        return apiSignature;
     }
 
-    public void setApiUrl(String apiUrl) {
-        this.apiUrl = apiUrl;
+    public void setApiSignature(String apiSignature) {
+        this.apiSignature = apiSignature;
     }
 
     public String getApiName() {
@@ -102,20 +97,12 @@ public class TradeResultDTO implements Serializable {
         this.apiName = apiName;
     }
 
-    public String getRetCode() {
-        return retCode;
+    public Object getResponse() {
+        return response;
     }
 
-    public void setRetCode(String retCode) {
-        this.retCode = retCode;
-    }
-
-    public String getRetMsg() {
-        return retMsg;
-    }
-
-    public void setRetMsg(String retMsg) {
-        this.retMsg = retMsg;
+    public void setResponse(Object response) {
+        this.response = response;
     }
 
     public Timestamp getRequestTime() {
@@ -148,14 +135,12 @@ public class TradeResultDTO implements Serializable {
                 .add("systemGroup", systemGroup)
                 .add("systemCode", systemCode)
                 .add("systemName", systemName)
-                .add("apiUrl", apiUrl)
+                .add("apiSignature", apiSignature)
                 .add("apiName", apiName)
-                .add("retCode", retCode)
-                .add("retMsg", retMsg)
+                .add("response", response)
                 .add("requestTime", requestTime)
                 .add("responseTime", responseTime)
                 .add("costTime", costTime)
                 .toString();
     }
-
 }

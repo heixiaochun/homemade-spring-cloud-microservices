@@ -1,5 +1,6 @@
-package com.xplmc.learning.homemade.gateway.common;
+package com.xplmc.learning.homemade.gateway.common.log;
 
+import com.alibaba.fastjson.JSON;
 import com.xplmc.learning.homemade.gateway.dto.TradeResultDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class TradeResultKafkaSender {
 
     private static final Logger logger = LoggerFactory.getLogger(TradeResultKafkaSender.class);
 
-    private KafkaTemplate<String, TradeResultDTO> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Value("${tradeResult.topicName}")
     private String tradeResultTopicName;
@@ -35,16 +36,15 @@ public class TradeResultKafkaSender {
     private String tradeResultSystemName;
 
     @Autowired
-    public TradeResultKafkaSender(KafkaTemplate<String, TradeResultDTO> kafkaTemplate) {
+    TradeResultKafkaSender(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
     /**
      * send tradeResultDTO to kafka
      */
-    public void send(String retCode, String retMsg) {
-        TradeResultDTO tradeResultDTO = this.buildTradeResultDTO(retCode, retMsg);
-        ListenableFuture<SendResult<String, TradeResultDTO>> future = kafkaTemplate.send(tradeResultTopicName, tradeResultDTO);
+    void send(TradeResultDTO tradeResultDTO) {
+        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(tradeResultTopicName, JSON.toJSONString(tradeResultDTO));
         future.addCallback(o -> logger.info("msg send success: {}", o.getProducerRecord()),
                 throwable -> logger.error("msg send failure", throwable));
     }
@@ -52,13 +52,11 @@ public class TradeResultKafkaSender {
     /**
      * init tradeResultDTO
      */
-    private TradeResultDTO buildTradeResultDTO(String retCode, String retMsg) {
+    TradeResultDTO initTradeResultDTO() {
         TradeResultDTO tradeResultDTO = new TradeResultDTO();
         tradeResultDTO.setSystemGroup(tradeResultSystemGroup);
         tradeResultDTO.setSystemCode(tradeResultSystemCode);
         tradeResultDTO.setSystemName(tradeResultSystemName);
-        tradeResultDTO.setRetCode(retCode);
-        tradeResultDTO.setRetMsg(retMsg);
         return tradeResultDTO;
     }
 

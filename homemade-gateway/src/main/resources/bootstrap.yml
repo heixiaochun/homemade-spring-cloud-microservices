@@ -27,7 +27,7 @@ zuul:
       serviceId: homemade-whitelist
 
 tradeResult:
-  topicName: TRADE_RESULT_DEV
+  topicName: TRADE_RESULT_TEST
   systemGroup: test
   systemCode: test
   systemName: test
