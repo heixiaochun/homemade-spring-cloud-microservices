@@ -2,6 +2,8 @@ package com.xplmc.learning.homemade.gateway.common;
 
 /**
  * gateway common constants
+ *
+ * @author luke
  */
 public final class GatewayConstants {
 

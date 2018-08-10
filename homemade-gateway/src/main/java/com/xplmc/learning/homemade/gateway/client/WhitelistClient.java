@@ -10,12 +10,17 @@ import java.util.Map;
 
 /**
  * whitelist client
+ *
+ * @author luke
  */
 @FeignClient(serviceId = GatewayConstants.WHITELIST_SERVER_ID)
 public interface WhitelistClient {
 
     /**
      * whitelist simple echo test client
+     *
+     * @param text path variable text
+     * @return remote result
      */
     @RequestMapping(method = RequestMethod.GET, value = GatewayConstants.WHITELIST_SIMPLE_ECHO_PATH)
     Map<String, String> echo(@PathVariable("text") String text);

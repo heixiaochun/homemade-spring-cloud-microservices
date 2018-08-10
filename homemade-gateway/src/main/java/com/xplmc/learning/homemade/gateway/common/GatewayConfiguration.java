@@ -7,6 +7,8 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * homemade gateway specific configuration
+ *
+ * @author luke
  */
 @Configuration
 public class GatewayConfiguration {

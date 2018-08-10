@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * example show how @EnableZuulProxy works
+ *
+ * @author luke
  */
 @Component
 public class WhitelistZuulRunner implements CommandLineRunner {
