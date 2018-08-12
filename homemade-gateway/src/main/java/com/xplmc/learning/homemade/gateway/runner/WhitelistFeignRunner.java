@@ -26,7 +26,11 @@ public class WhitelistFeignRunner implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-        logger.info("echo: {}", whitelistClient.echo("haha"));
+        try {
+            logger.info("echo: {}", whitelistClient.echo("haha"));
+        } catch (Exception e) {
+            logger.error("whitelist feign runner error", e);
+        }
     }
 
 }

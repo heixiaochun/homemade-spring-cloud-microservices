@@ -1,6 +1,6 @@
 package com.xplmc.learning.homemade.gateway.controller;
 
-import com.xplmc.learning.homemade.gateway.common.GatewayConstants;
+import com.xplmc.learning.homemade.gateway.common.constant.GatewayConstants;
 import com.xplmc.learning.homemade.gateway.common.log.TradeResultKafkaSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;

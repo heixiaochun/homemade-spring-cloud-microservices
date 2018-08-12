@@ -1,6 +1,6 @@
 package com.xplmc.learning.homemade.gateway.client;
 
-import com.xplmc.learning.homemade.gateway.common.GatewayConstants;
+import com.xplmc.learning.homemade.gateway.common.constant.GatewayConstants;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

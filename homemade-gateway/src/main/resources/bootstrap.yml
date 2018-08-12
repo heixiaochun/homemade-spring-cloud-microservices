@@ -16,6 +16,17 @@ eureka:
   instance:
     preferIpAddress: true
 
+niws:
+  loadbalancer:
+    availabilityFilteringRule:
+      filterCircuitTripped: false
+
+ribbon:
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  ConnectTimeout: 1500
+  ReadTimeout: 5000
+
 management:
   security:
     enabled: false
@@ -27,11 +38,17 @@ zuul:
       serviceId: homemade-whitelist
 
 tradeResult:
+  sendToKafka: false
   topicName: TRADE_RESULT_TEST
   systemGroup: test
   systemCode: test
   systemName: test
 
+logging:
+  level:
+    com.netflix.loadbalancer: info
+    org.springframework.retry.support: debug
+    org.springframework.cloud.netflix.ribbon: debug
 
 # using eureka cluster mode
 ---

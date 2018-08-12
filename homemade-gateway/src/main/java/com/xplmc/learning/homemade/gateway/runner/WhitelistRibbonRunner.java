@@ -4,7 +4,7 @@ import com.netflix.loadbalancer.BaseLoadBalancer;
 import com.netflix.loadbalancer.LoadBalancerBuilder;
 import com.netflix.loadbalancer.RoundRobinRule;
 import com.netflix.loadbalancer.Server;
-import com.xplmc.learning.homemade.gateway.common.GatewayConstants;
+import com.xplmc.learning.homemade.gateway.common.constant.GatewayConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,19 +35,23 @@ public class WhitelistRibbonRunner implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-        //get all whitelist server list and put them into list
-        List<Server> serverList = discoveryClient.getInstances(GatewayConstants.WHITELIST_SERVER_ID)
-                .stream().map(si -> new Server(si.getHost(), si.getPort())).collect(Collectors.toList());
+        try {
+            //get all whitelist server list and put them into list
+            List<Server> serverList = discoveryClient.getInstances(GatewayConstants.WHITELIST_SERVER_ID)
+                    .stream().map(si -> new Server(si.getHost(), si.getPort())).collect(Collectors.toList());
 
-        //create a RoundRobinRule load balancer
-        BaseLoadBalancer lb = LoadBalancerBuilder.newBuilder().withRule(new RoundRobinRule())
-                .buildFixedServerListLoadBalancer(serverList);
+            //create a RoundRobinRule load balancer
+            BaseLoadBalancer lb = LoadBalancerBuilder.newBuilder().withRule(new RoundRobinRule())
+                    .buildFixedServerListLoadBalancer(serverList);
 
-        //test load balancer selection rule
-        IntStream.range(0, 10).forEach(i -> {
-            Server currentServer = lb.chooseServer();
-            logger.info("count: {}, selected: {}", i, currentServer);
-        });
+            //test load balancer selection rule
+            IntStream.range(0, 10).forEach(i -> {
+                Server currentServer = lb.chooseServer();
+                logger.info("count: {}, selected: {}", i, currentServer);
+            });
+        } catch (Exception e) {
+            logger.error("whitelist ribbon runner error", e);
+        }
     }
 
 }

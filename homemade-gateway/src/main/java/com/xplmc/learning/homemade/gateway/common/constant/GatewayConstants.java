@@ -1,4 +1,4 @@
-package com.xplmc.learning.homemade.gateway.common;
+package com.xplmc.learning.homemade.gateway.common.constant;
 
 /**
  * gateway common constants

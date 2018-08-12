@@ -1,6 +1,6 @@
 package com.xplmc.learning.homemade.gateway.runner;
 
-import com.xplmc.learning.homemade.gateway.common.GatewayConstants;
+import com.xplmc.learning.homemade.gateway.common.constant.GatewayConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

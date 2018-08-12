@@ -8,6 +8,13 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8081/eureka}
 
+management:
+  security:
+    enabled: false
+endpoints:
+  shutdown:
+    enabled: true
+
 # using eureka cluster mode
 ---
 spring:
