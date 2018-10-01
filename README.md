@@ -1,4 +1,4 @@
-# homemade-spring-cloud-microservice
+# homemade-spring-cloud-microservices
 ## homemade-eureka-service
 By default, using application.yml's single server mode.
 
