@@ -33,12 +33,10 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
             <version>${spring-kafka.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-retry</artifactId>
-                    <groupId>org.springframework.retry</groupId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

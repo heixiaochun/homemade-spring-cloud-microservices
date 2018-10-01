@@ -26,6 +26,7 @@ ribbon:
   MaxAutoRetriesNextServer: 1
   ConnectTimeout: 1500
   ReadTimeout: 5000
+  retryableStatusCodes: 500,502
 
 management:
   security:

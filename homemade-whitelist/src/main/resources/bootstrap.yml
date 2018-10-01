@@ -41,3 +41,10 @@ spring:
   profiles: dev03
 server:
   port: 50003
+
+---
+spring:
+  profiles: random500
+mockResponse:
+  randomInternalError: true
+  internalErrorChance: 1.0
