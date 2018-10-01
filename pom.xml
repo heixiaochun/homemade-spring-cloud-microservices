@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xplmc.learning</groupId>
-    <artifactId>homemade-spring-cloud-microservice</artifactId>
+    <artifactId>homemade-spring-cloud-microservices</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>homemade-eureka-service</module>
@@ -13,7 +13,7 @@
     </modules>
     <packaging>pom</packaging>
 
-    <name>homemade-spring-cloud-microservice</name>
+    <name>homemade-spring-cloud-microservices</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
