@@ -27,8 +27,9 @@ public class TradeResultKafkaSender {
 
     private TradeResultProperties tradeResultProperties;
 
-    @Autowired
-    TradeResultKafkaSender(KafkaTemplate<String, String> kafkaTemplate, TradeResultProperties tradeResultProperties) {
+
+    TradeResultKafkaSender(@Autowired(required = false) KafkaTemplate<String, String> kafkaTemplate,
+                           @Autowired TradeResultProperties tradeResultProperties) {
         this.kafkaTemplate = kafkaTemplate;
         this.tradeResultProperties = tradeResultProperties;
     }
@@ -37,7 +38,7 @@ public class TradeResultKafkaSender {
      * send tradeResultDTO to kafka
      */
     void send(TradeResultDTO tradeResultDTO) {
-        if (tradeResultProperties.isSendToKafka()) {
+        if (tradeResultProperties.isSendToKafka() && kafkaTemplate != null) {
             ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(tradeResultProperties.getTopicName(),
                     JSON.toJSONString(tradeResultDTO));
             future.addCallback(o -> logger.info("msg send success: {}", o.getProducerRecord()),
