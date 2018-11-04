@@ -19,14 +19,14 @@ eureka:
 niws:
   loadbalancer:
     availabilityFilteringRule:
-      filterCircuitTripped: false
+      filterCircuitTripped: true
 
 ribbon:
   MaxAutoRetries: 0
   MaxAutoRetriesNextServer: 1
   ConnectTimeout: 1500
   ReadTimeout: 5000
-  retryableStatusCodes: 500,502
+  retryableStatusCodes: 503
 
 management:
   security:
@@ -50,6 +50,7 @@ logging:
     com.netflix.loadbalancer: info
     org.springframework.retry.support: debug
     org.springframework.cloud.netflix.ribbon: debug
+    com.netflix.hystrix: debug
 
 # using eureka cluster mode
 ---
