@@ -19,14 +19,23 @@ eureka:
 niws:
   loadbalancer:
     availabilityFilteringRule:
-      filterCircuitTripped: true
+      filterCircuitTripped: false
 
 ribbon:
   MaxAutoRetries: 0
   MaxAutoRetriesNextServer: 1
-  ConnectTimeout: 1500
-  ReadTimeout: 5000
+  ConnectTimeout: 200
+  ReadTimeout: 2000
+  OkToRetryOnAllOperations: false
   retryableStatusCodes: 503
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
 
 management:
   security:

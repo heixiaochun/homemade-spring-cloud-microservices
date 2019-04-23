@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,8 +37,12 @@ public class SimpleEchoController {
         mockOperation();
         // sleep for a certain time
         sleepForAWhile(sleepTime);
-        params.put("text", text);
-        return params;
+        if (params != null) {
+            params.put("text", text);
+            return params;
+        } else {
+            return Collections.singletonMap("text", text);
+        }
     }
 
     private void mockOperation() {

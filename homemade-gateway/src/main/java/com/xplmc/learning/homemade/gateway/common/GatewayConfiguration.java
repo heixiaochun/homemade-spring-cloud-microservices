@@ -1,21 +1,20 @@
 package com.xplmc.learning.homemade.gateway.common;
 
 import com.xplmc.learning.homemade.gateway.common.log.TradeResultClientHttpRequestInterceptor;
+import com.xplmc.learning.homemade.gateway.common.ribbon.MyRibbonLoadBalancedRetryPolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.cloud.netflix.ribbon.RibbonClientSpecification;
+import org.springframework.cloud.client.loadbalancer.*;
 import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
+import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerContext;
 import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.util.List;
 
 /**
  * homemade gateway specific configuration
@@ -26,14 +25,6 @@ import java.util.List;
 public class GatewayConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger(GatewayConfiguration.class);
-
-    @Bean
-    @Autowired(required = false)
-    public SpringClientFactory springClientFactory(List<RibbonClientSpecification> configurations) {
-        SpringClientFactory factory = new SpringClientFactory();
-        factory.setConfigurations(configurations);
-        return factory;
-    }
 
     /**
      * customized RibbonLoadBalancerClient
@@ -60,8 +51,31 @@ public class GatewayConfiguration {
     @LoadBalanced
     public RestTemplate restTemplate(TradeResultClientHttpRequestInterceptor tradeResultClientHttpRequestInterceptor) {
         RestTemplate restTemplate = new RestTemplate();
+        SimpleClientHttpRequestFactory sf = new SimpleClientHttpRequestFactory();
+        sf.setConnectTimeout(200);
+        sf.setReadTimeout(1000);
+        restTemplate.setRequestFactory(sf);
         restTemplate.getInterceptors().add(tradeResultClientHttpRequestInterceptor);
         return restTemplate;
+    }
+
+    /**
+     * 支持连接超时重试
+     *
+     * @param springClientFactory
+     * @return
+     */
+    @Bean
+    public LoadBalancedRetryPolicyFactory ribbonLoadBalancedRetryPolicyFactory(SpringClientFactory springClientFactory) {
+        return new LoadBalancedRetryPolicyFactory() {
+            @Override
+            public LoadBalancedRetryPolicy create(String serviceId, ServiceInstanceChooser loadBalanceChooser) {
+                RibbonLoadBalancerContext lbContext = springClientFactory
+                        .getLoadBalancerContext(serviceId);
+                return new MyRibbonLoadBalancedRetryPolicy(serviceId, lbContext,
+                        loadBalanceChooser, springClientFactory.getClientConfig(serviceId));
+            }
+        };
     }
 
 }

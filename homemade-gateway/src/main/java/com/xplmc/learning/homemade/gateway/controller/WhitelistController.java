@@ -26,7 +26,7 @@ public class WhitelistController {
         this.echoService = echoService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = GatewayConstants.WHITELIST_SIMPLE_ECHO_PATH)
+    @RequestMapping(value = GatewayConstants.WHITELIST_SIMPLE_ECHO_PATH)
     public Map<String, String> echo(@PathVariable String text) throws URISyntaxException {
         return echoService.echo(text);
     }
