@@ -9,11 +9,13 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8081/eureka}
 
 management:
-  security:
-    enabled: false
-endpoints:
-  shutdown:
-    enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
 
 # using eureka cluster mode
 ---
@@ -45,6 +47,7 @@ server:
 ---
 spring:
   profiles: random500
-mockResponse:
-  randomInternalError: true
-  internalErrorChance: 1.0
+mock:
+  response:
+    randomInternalError: true
+    internalErrorChance: 1.0

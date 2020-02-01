@@ -1,14 +1,15 @@
 package com.xplmc.learning.homemade.whitelist.common.property;
 
-import com.google.common.base.MoreObjects;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.StringJoiner;
 
 /**
  * mock response properties
  *
  * @author luke
  */
-@ConfigurationProperties(prefix = "mockResponse")
+@ConfigurationProperties(prefix = "mock.response")
 public class MockResponseProperties {
 
     /**
@@ -39,9 +40,9 @@ public class MockResponseProperties {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("randomInternalError", randomInternalError)
-                .add("internalErrorChance", internalErrorChance)
+        return new StringJoiner(", ", MockResponseProperties.class.getSimpleName() + "[", "]")
+                .add("randomInternalError=" + randomInternalError)
+                .add("internalErrorChance=" + internalErrorChance)
                 .toString();
     }
 }

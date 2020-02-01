@@ -1,19 +1,18 @@
 spring:
   application:
     name: homemade-eureka-service
+#  security:
+#    user:
+#      name: eureka
+#      password: eureka
+
 server:
   port: 8081
-  context-path: /myeureka
+  servlet:
+    context-path: /myeureka
 eureka:
   instance:
     hostname: localhost
   client:
     registerWithEureka: false
     fetchRegistry: false
-
-security:
-  basic:
-    enabled: true
-  user:
-      name: eureka
-      password: eureka

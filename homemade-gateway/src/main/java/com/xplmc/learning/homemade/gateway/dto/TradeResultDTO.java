@@ -1,9 +1,8 @@
 package com.xplmc.learning.homemade.gateway.dto;
 
-import com.google.common.base.MoreObjects;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.StringJoiner;
 
 /**
  * trade response DTO
@@ -129,18 +128,20 @@ public class TradeResultDTO implements Serializable {
         this.costTime = costTime;
     }
 
+
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("systemGroup", systemGroup)
-                .add("systemCode", systemCode)
-                .add("systemName", systemName)
-                .add("apiSignature", apiSignature)
-                .add("apiName", apiName)
-                .add("response", response)
-                .add("requestTime", requestTime)
-                .add("responseTime", responseTime)
-                .add("costTime", costTime)
+        return new StringJoiner(", ", TradeResultDTO.class.getSimpleName() + "[", "]")
+                .add("systemGroup='" + systemGroup + "'")
+                .add("systemCode='" + systemCode + "'")
+                .add("systemName='" + systemName + "'")
+                .add("apiSignature='" + apiSignature + "'")
+                .add("apiName='" + apiName + "'")
+                .add("response=" + response)
+                .add("requestTime=" + requestTime)
+                .add("responseTime=" + responseTime)
+                .add("costTime=" + costTime)
                 .toString();
     }
+
 }

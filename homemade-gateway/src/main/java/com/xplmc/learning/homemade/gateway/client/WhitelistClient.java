@@ -1,7 +1,7 @@
 package com.xplmc.learning.homemade.gateway.client;
 
 import com.xplmc.learning.homemade.gateway.common.constant.GatewayConstants;
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author luke
  */
-@FeignClient(serviceId = GatewayConstants.WHITELIST_SERVER_ID)
+@FeignClient(GatewayConstants.WHITELIST_SERVER_ID)
 public interface WhitelistClient {
 
     /**

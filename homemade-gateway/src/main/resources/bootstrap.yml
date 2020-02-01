@@ -47,12 +47,13 @@ zuul:
       path: /wl/**
       serviceId: homemade-whitelist
 
-tradeResult:
-  sendToKafka: false
-  topicName: TRADE_RESULT_TEST
-  systemGroup: test
-  systemCode: test
-  systemName: test
+trade:
+  result:
+    sendToKafka: false
+    topicName: TRADE_RESULT_TEST
+    systemGroup: test
+    systemCode: test
+    systemName: test
 
 logging:
   level:

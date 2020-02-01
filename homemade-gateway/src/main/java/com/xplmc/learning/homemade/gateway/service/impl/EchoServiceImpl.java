@@ -41,7 +41,7 @@ public class EchoServiceImpl implements EchoService {
         // construct request entity
         URI uri = new UriTemplate("http://" + GatewayConstants.WHITELIST_SERVER_ID +
                 GatewayConstants.WHITELIST_SIMPLE_ECHO_PATH).expand(text);
-        RequestEntity<Map<String, String>> requestEntity = RequestEntity.post(uri).accept(MediaType.APPLICATION_JSON_UTF8).body(Collections.singletonMap("hbo", "哈哈哈"));
+        RequestEntity<Map<String, String>> requestEntity = RequestEntity.post(uri).accept(MediaType.APPLICATION_JSON).body(Collections.singletonMap("hbo", "哈哈哈"));
 
         // construct response type
         ParameterizedTypeReference<HashMap<String, String>> responseType = new ParameterizedTypeReference<HashMap<String, String>>() {

@@ -1,14 +1,15 @@
 package com.xplmc.learning.homemade.gateway.common.property;
 
-import com.google.common.base.MoreObjects;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.StringJoiner;
 
 /**
  * trade result properties
  *
  * @author luke
  */
-@ConfigurationProperties(prefix = "tradeResult")
+@ConfigurationProperties(prefix = "trade.result")
 public class TradeResultProperties {
 
     /**
@@ -79,13 +80,12 @@ public class TradeResultProperties {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("sendToKafka", sendToKafka)
-                .add("topicName", topicName)
-                .add("systemGroup", systemGroup)
-                .add("systemCode", systemCode)
-                .add("systemName", systemName)
+        return new StringJoiner(", ", TradeResultProperties.class.getSimpleName() + "[", "]")
+                .add("sendToKafka=" + sendToKafka)
+                .add("topicName='" + topicName + "'")
+                .add("systemGroup='" + systemGroup + "'")
+                .add("systemCode='" + systemCode + "'")
+                .add("systemName='" + systemName + "'")
                 .toString();
     }
-
 }

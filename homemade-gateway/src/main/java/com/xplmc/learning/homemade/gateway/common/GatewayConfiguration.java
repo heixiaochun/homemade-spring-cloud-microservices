@@ -65,17 +65,17 @@ public class GatewayConfiguration {
      * @param springClientFactory
      * @return
      */
-    @Bean
-    public LoadBalancedRetryPolicyFactory ribbonLoadBalancedRetryPolicyFactory(SpringClientFactory springClientFactory) {
-        return new LoadBalancedRetryPolicyFactory() {
-            @Override
-            public LoadBalancedRetryPolicy create(String serviceId, ServiceInstanceChooser loadBalanceChooser) {
-                RibbonLoadBalancerContext lbContext = springClientFactory
-                        .getLoadBalancerContext(serviceId);
-                return new MyRibbonLoadBalancedRetryPolicy(serviceId, lbContext,
-                        loadBalanceChooser, springClientFactory.getClientConfig(serviceId));
-            }
-        };
-    }
+//    @Bean
+//    public LoadBalancedRetryPolicyFactory ribbonLoadBalancedRetryPolicyFactory(SpringClientFactory springClientFactory) {
+//        return new LoadBalancedRetryPolicyFactory() {
+//            @Override
+//            public LoadBalancedRetryPolicy create(String serviceId, ServiceInstanceChooser loadBalanceChooser) {
+//                RibbonLoadBalancerContext lbContext = springClientFactory
+//                        .getLoadBalancerContext(serviceId);
+//                return new MyRibbonLoadBalancedRetryPolicy(serviceId, lbContext,
+//                        loadBalanceChooser, springClientFactory.getClientConfig(serviceId));
+//            }
+//        };
+//    }
 
 }
