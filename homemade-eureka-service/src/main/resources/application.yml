@@ -1,10 +1,10 @@
 spring:
   application:
     name: homemade-eureka-service
-#  security:
-#    user:
-#      name: eureka
-#      password: eureka
+  security:
+    user:
+      name: ${DEV_USER}
+      password: ${DEV_PWD}
 
 server:
   port: 8081

@@ -14,5 +14,4 @@ In cluster mode, you need to config hosts in you server.
 
 ## TODO
 升级SpringBoot 1.x 到 2.x，待处理问题如下：
-1. eureka security未启用
-2. 重试机制未启用
+1. 重试机制未启用
