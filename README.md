@@ -11,7 +11,3 @@ In cluster mode, you need to config hosts in you server.
 127.0.0.1 peer2
 127.0.0.1 peer3
 ```
-
-## TODO
-升级SpringBoot 1.x 到 2.x，待处理问题如下：
-1. 重试机制未启用

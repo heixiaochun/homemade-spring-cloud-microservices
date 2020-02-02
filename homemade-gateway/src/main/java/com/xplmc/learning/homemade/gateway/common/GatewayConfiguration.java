@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.*;
+import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancedRetryFactory;
 import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
 import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerContext;
 import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
@@ -29,8 +30,6 @@ public class GatewayConfiguration {
     /**
      * customized RibbonLoadBalancerClient
      * print the reconstructed URI
-     *
-     * @return
      */
     @Bean
     public LoadBalancerClient loadBalancerClient(SpringClientFactory springClientFactory) {
@@ -61,21 +60,18 @@ public class GatewayConfiguration {
 
     /**
      * 支持连接超时重试
-     *
-     * @param springClientFactory
-     * @return
      */
-//    @Bean
-//    public LoadBalancedRetryPolicyFactory ribbonLoadBalancedRetryPolicyFactory(SpringClientFactory springClientFactory) {
-//        return new LoadBalancedRetryPolicyFactory() {
-//            @Override
-//            public LoadBalancedRetryPolicy create(String serviceId, ServiceInstanceChooser loadBalanceChooser) {
-//                RibbonLoadBalancerContext lbContext = springClientFactory
-//                        .getLoadBalancerContext(serviceId);
-//                return new MyRibbonLoadBalancedRetryPolicy(serviceId, lbContext,
-//                        loadBalanceChooser, springClientFactory.getClientConfig(serviceId));
-//            }
-//        };
-//    }
+    @Bean
+    public LoadBalancedRetryFactory loadBalancedRetryFactory(final SpringClientFactory springClientFactory) {
+        return new RibbonLoadBalancedRetryFactory(springClientFactory) {
+            @Override
+            public LoadBalancedRetryPolicy createRetryPolicy(String service, ServiceInstanceChooser serviceInstanceChooser) {
+                RibbonLoadBalancerContext lbContext = springClientFactory
+                        .getLoadBalancerContext(service);
+                return new MyRibbonLoadBalancedRetryPolicy(service, lbContext,
+                        serviceInstanceChooser, springClientFactory.getClientConfig(service));
+            }
+        };
+    }
 
 }
