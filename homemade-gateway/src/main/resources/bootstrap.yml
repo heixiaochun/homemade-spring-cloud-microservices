@@ -37,10 +37,6 @@ hystrix:
           thread:
             timeoutInMilliseconds: 10000
 
-management:
-  security:
-    enabled: false
-
 zuul:
   routes:
     hi:
